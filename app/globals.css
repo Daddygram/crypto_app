@@ -25,6 +25,10 @@
     text-fill-color: transparent;
   }
 
+  .text-outline {
+    -webkit-text-stroke: 2px black
+  }
+
   .heading1 {
     @apply text-[64px] leading-[67.2px] font-bold;
   }
@@ -115,6 +119,11 @@
 
   .flex-end {
     @apply flex justify-end;
+  }
+
+  .float {
+    position: absolute;
+    animation: move 2s infinite;
   }
 
   .inner-width {
@@ -237,4 +246,14 @@
 .no-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+@keyframes move {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1);
+  }
 }
