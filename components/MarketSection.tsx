@@ -16,7 +16,7 @@ const MarketSection = () => {
       const response = await fetch(url, coinOptions);
       if (response.status === 429) {
         console.log('Rate limit exceeded. Waiting and retrying...');
-        setTimeout(fetchData, 60000); // Wait for 1 minute and retry
+        setTimeout(fetchData, 60000);
       } else if (response.ok) {
         const json = await response.json();
         setCoins(json);
@@ -40,7 +40,7 @@ const MarketSection = () => {
   const paginationButtons = [];
   for (let i = 1; i <= 5; i++) {
     paginationButtons.push(
-      <button
+      <button className="hover:brightness-110 hover:animate-pulse font-bold py-3 px-6 rounded-full bg-gradient-to-r from-blue-500 to-purple text-white"
         key={i}
         onClick={() => setPage(i)}
       >
@@ -61,7 +61,7 @@ const MarketSection = () => {
         </div>
         <div>
           {coins.map((item: CoinData) => (
-            <Link href="/" key={item.id} className='grid grid-cols-4 gap-4rem p-6 w-full text-white justify-start items-center'>
+            <Link href="/" key={item.id} className='grid grid-cols-4 gap-4rem p-6 w-full text-white justify-start items-center border-b-2 border-white-400 hover:brightness-120 hover:bg-black-400'>
             <span className='flex gap-3'>
               <Image src={item.image} width={50} height={50} alt={item.name} />
               <p className='text-start flex-center'>{item.name}</p>
@@ -71,7 +71,10 @@ const MarketSection = () => {
             <p className='text-right'>{`$ ${numberWithCommas(item.market_cap)}`}</p>
           </Link>
           ))}
-          {paginationButtons}
+          <div className='mt-[30px] flex-center gap-3'>
+            {paginationButtons}
+          </div>
+          
         </div>
       </section>
   )
