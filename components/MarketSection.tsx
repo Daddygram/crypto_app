@@ -7,9 +7,9 @@ import { coinOptions } from './utilities/FetchData';
 
 const MarketSection = () => {
   const [coins, setCoins] = useState<CoinData[]>([])
-  // const [page, setPage] = useState([])
+  const [page, setPage] = useState<Number>(1)
 
-  const url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false&locale=en"
+  const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=${page}&sparkline=false&locale=en`
 
   const fetchData = async () => {
     try {
@@ -37,18 +37,17 @@ const MarketSection = () => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
-  // const paginationButtons = [];
-  // for (let i = 1; i <= 5; i++) {
-  //   paginationButtons.push(
-  //     <button
-  //       key={i}
-  //       onClick={() => setCurrentPage(i)}
-  //       className={i === currentPage ? "activePagi" : ""}
-  //     >
-  //       {i}
-  //     </button>
-  //   );
-  // }
+  const paginationButtons = [];
+  for (let i = 1; i <= 5; i++) {
+    paginationButtons.push(
+      <button
+        key={i}
+        onClick={() => setPage(i)}
+      >
+        {i}
+      </button>
+    );
+  }
 
   return (
       <section className='nav-padding w-full'>
@@ -62,14 +61,17 @@ const MarketSection = () => {
         </div>
         <div>
           {coins.map((item: CoinData) => (
-            <Link href="/" key={item.id} className='grid grid-cols-4 gap-4rem p-6 w-full text-white'>
-              <span><Image src={item.image} width={50} height={50} alt={item.name}/></span>
-              <p>{item.name}</p>
-              <p>{item.price_change_percentage_24h.toFixed(2)} %</p>
-              <p>$ {numberWithCommas(item.market_cap)}</p>
-              
-            </Link>
+            <Link href="/" key={item.id} className='grid grid-cols-4 gap-4rem p-6 w-full text-white justify-start items-center'>
+            <span className='flex gap-3'>
+              <Image src={item.image} width={50} height={50} alt={item.name} />
+              <p className='text-start flex-center'>{item.name}</p>
+            </span>
+            <p className='text-right'>{`$ ${item.current_price}`}</p>
+            <p className='text-right'>{`${item.price_change_percentage_24h.toFixed(2)} %`}</p>
+            <p className='text-right'>{`$ ${numberWithCommas(item.market_cap)}`}</p>
+          </Link>
           ))}
+          {paginationButtons}
         </div>
       </section>
   )
