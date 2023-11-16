@@ -1,5 +1,6 @@
 "use client"
 
+import AboutSection from '@/components/AboutSection'
 import MarketSection from '@/components/MarketSection'
 import SearchForm from '@/components/SearchForm'
 // import Image from 'next/image'
@@ -21,6 +22,7 @@ const page = () => {
         </div>
         <SearchForm coins={coins} setCoins={setCoins} />
         <MarketSection coins={coins} setCoins={setCoins} />
+        <AboutSection />
       </section>
     </main>
   )

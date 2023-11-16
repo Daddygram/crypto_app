@@ -5,6 +5,7 @@ import Pagination from '@mui/material/Pagination';
 import Image from 'next/image';
 import Link from 'next/link';
 import { coinOptions } from './utilities/FetchData';
+import Loading from '@/app/(root)/(home)/Loading';
 
 const MarketSection: React.FC<CoinsProps> = ({coins, setCoins}) => {
   const [page, setPage] = useState<number>(1)
@@ -48,10 +49,10 @@ const MarketSection: React.FC<CoinsProps> = ({coins, setCoins}) => {
     window.scrollTo({ behavior: 'smooth' });
   };
 
-  // if (!currentCoins.length) return <Loader />;
+  if (!currentCoins.length) return <Loading />;
 
   return (
-      <section className='nav-padding w-full'>
+      <section id='market' className='nav-padding w-full'>
         <h2 className='heading3 mb-7 text-white'>Cryptocurrency Prices by Market Cap</h2>
         <div className='grid grid-cols-4 gap-4rem p-6 w-full 
         gradient_purple text-white rounded-t-xl'>

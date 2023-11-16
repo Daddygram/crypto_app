@@ -7,7 +7,7 @@ import { coinOptions } from './utilities/FetchData'
 import { Button } from '@mui/material'
 
 
-const SearchForm: React.FC<CoinsProps> = ({coins, setCoins}) => {
+const SearchForm: React.FC<CoinsProps> = ({setCoins}) => {
     const [search, setSearch] = useState('')
 
     const handleSearch = async () => {
@@ -45,7 +45,7 @@ const SearchForm: React.FC<CoinsProps> = ({coins, setCoins}) => {
             value={search}
             onChange={(e) => setSearch(e.target.value.toLowerCase())}
             onSubmit={handleSearch}/>
-            <Button className="mr-3" sx={{ bgcolor: '#FF2625', color: '#fff', textTransform: 'none', width: { lg: '173px', xs: '100px' }, height: '56px', position: 'absolute', right: '0px', fontSize: { lg: '25px', xs: '20px' } }} onClick={handleSearch}>
+            <Button className="hover:bg-black-200 mr-3" sx={{ color: '#fff', textTransform: 'none', width: { lg: '173px', xs: '100px' }, height: '56px', position: 'absolute', right: '0px', fontSize: { lg: '25px', xs: '20px' } }} onClick={handleSearch}>
               Search
             </Button>
         </label>
