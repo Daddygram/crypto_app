@@ -3,4 +3,4 @@ export const coinOptions = {
     headers: {
         'accept': 'application/json'
     },
-  };
+  }

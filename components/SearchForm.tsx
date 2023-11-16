@@ -3,21 +3,29 @@ import React, { useEffect, useState } from 'react'
 
 import Image from 'next/image'
 import { Input } from "@/components/ui/input"
+import { coinOptions } from './utilities/FetchData'
+import { Button } from '@mui/material'
 
 
-const SearchForm = () => {
+const SearchForm: React.FC<CoinsProps> = ({coins, setCoins}) => {
     const [search, setSearch] = useState('')
 
-    useEffect(() => {
-      const delayDebounceFn = setTimeout(() => {
-        console.log(search)
-      }, 300)
-    
-      return () => {
-        clearTimeout(delayDebounceFn)
+    const handleSearch = async () => {
+      if (search) {
+        const res = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en', coinOptions);
+        const coinsData = await res.json()
+  
+        const searchedCoins = coinsData.filter(
+          (item:any) => item.name.toLowerCase().includes(search)
+                 || item.symbol.toLowerCase().includes(search),
+        );
+  
+        window.scrollTo({ left: 100, behavior: 'smooth' });
+  
+        setSearch('');
+        setCoins(searchedCoins);
       }
-    }, [search])
-    
+    };
 
   return (
     <form className='flex-center mx-auto mt-10 w-full sm:mt-10 sm:px-5'>
@@ -33,9 +41,13 @@ const SearchForm = () => {
             pl-20 pr-8 text-white-800 !ring-0 !ring-offset-0
             placeholder:text-white-800' 
             type='text'
-            placeholder='Search'
+            placeholder=''
             value={search}
-            onChange={(e) => setSearch(e.target.value)}/>
+            onChange={(e) => setSearch(e.target.value.toLowerCase())}
+            onSubmit={handleSearch}/>
+            <Button className="mr-3" sx={{ bgcolor: '#FF2625', color: '#fff', textTransform: 'none', width: { lg: '173px', xs: '100px' }, height: '56px', position: 'absolute', right: '0px', fontSize: { lg: '25px', xs: '20px' } }} onClick={handleSearch}>
+              Search
+            </Button>
         </label>
     </form>
   )

@@ -1,9 +1,15 @@
+"use client"
+
 import MarketSection from '@/components/MarketSection'
 import SearchForm from '@/components/SearchForm'
 // import Image from 'next/image'
 import React from 'react'
+import { useState } from 'react'
 
 const page = () => {
+
+  const [coins, setCoins] = useState<CoinData[]>([])
+  
   return (
     <main className='flex-center paddings mx-auto w-full max-w-screen-2xl flex-col'>
       <section className='nav-padding w-full'>
@@ -13,8 +19,8 @@ const page = () => {
             Track and trade <br /> <span>Crypto Currencies</span>
           </h1>
         </div>
-        <SearchForm />
-        <MarketSection />
+        <SearchForm coins={coins} setCoins={setCoins} />
+        <MarketSection coins={coins} setCoins={setCoins} />
       </section>
     </main>
   )

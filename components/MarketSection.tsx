@@ -1,15 +1,16 @@
 "use client"
 import React, { useEffect, useState } from 'react'
+import Pagination from '@mui/material/Pagination';
 
 import Image from 'next/image';
 import Link from 'next/link';
 import { coinOptions } from './utilities/FetchData';
 
-const MarketSection = () => {
-  const [coins, setCoins] = useState<CoinData[]>([])
-  const [page, setPage] = useState<Number>(1)
+const MarketSection: React.FC<CoinsProps> = ({coins, setCoins}) => {
+  const [page, setPage] = useState<number>(1)
+  const [coinsPerPage] = useState(10);
 
-  const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=${page}&sparkline=false&locale=en`
+  const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en`
 
   const fetchData = async () => {
     try {
@@ -29,25 +30,25 @@ const MarketSection = () => {
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    // fetchData();
+  }, [page]);
   console.log(coins)
+
+  const indexOfLastCoin = page * coinsPerPage;
+  const indexOfFirstCoin = indexOfLastCoin - coinsPerPage;
+  const currentCoins = coins.slice(indexOfFirstCoin, indexOfLastCoin);
 
   function numberWithCommas(x:number) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
-  const paginationButtons = [];
-  for (let i = 1; i <= 5; i++) {
-    paginationButtons.push(
-      <button className="hover:brightness-110 hover:animate-pulse font-bold py-3 px-6 rounded-full bg-gradient-to-r from-blue-500 to-purple text-white"
-        key={i}
-        onClick={() => setPage(i)}
-      >
-        {i}
-      </button>
-    );
-  }
+  const paginate = (event:any, value:number) => {
+    setPage(value);
+
+    window.scrollTo({ behavior: 'smooth' });
+  };
+
+  // if (!currentCoins.length) return <Loader />;
 
   return (
       <section className='nav-padding w-full'>
@@ -60,7 +61,7 @@ const MarketSection = () => {
           <p className='paragraph-regular text-end'>Market Cap</p>
         </div>
         <div>
-          {coins.map((item: CoinData) => (
+          {currentCoins.map((item: CoinData) => (
             <Link href="/" key={item.id} className='grid grid-cols-4 gap-4rem p-6 w-full text-white justify-start items-center border-b-2 border-white-400 hover:brightness-120 hover:bg-black-400'>
             <span className='flex gap-3'>
               <Image src={item.image} width={50} height={50} alt={item.name} />
@@ -72,7 +73,16 @@ const MarketSection = () => {
           </Link>
           ))}
           <div className='mt-[30px] flex-center gap-3'>
-            {paginationButtons}
+            <Pagination
+            color="secondary"
+            shape="rounded"
+            defaultPage={1}
+            count={Math.ceil(coins.length / coinsPerPage)}
+            page={page}
+            onChange={paginate}
+            size="large"
+            className="hover:brightness-110 font-bold py-3 px-5 rounded-full gradient_purple text-white"
+          />
           </div>
           
         </div>
