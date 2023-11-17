@@ -5,11 +5,10 @@ import Pagination from '@mui/material/Pagination';
 import Image from 'next/image';
 import Link from 'next/link';
 import { coinOptions } from './utilities/FetchData';
-import Loading from '@/app/(root)/(home)/Loading';
+import Loading from '@/app/(root)/(home)/loading';
 
-const MarketSection: React.FC<CoinsProps> = ({coins, setCoins}) => {
-  const [page, setPage] = useState<number>(1)
-  const [coinsPerPage] = useState(10);
+const MarketSection: React.FC<CoinsProps> = ({coins, setCoins, currentCoins, page, setPage, coinsPerPage}) => {
+  
 
   const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en`
 
@@ -31,13 +30,9 @@ const MarketSection: React.FC<CoinsProps> = ({coins, setCoins}) => {
   };
 
   useEffect(() => {
-    // fetchData();
+    fetchData();
   }, [page]);
   console.log(coins)
-
-  const indexOfLastCoin = page * coinsPerPage;
-  const indexOfFirstCoin = indexOfLastCoin - coinsPerPage;
-  const currentCoins = coins.slice(indexOfFirstCoin, indexOfLastCoin);
 
   function numberWithCommas(x:number) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

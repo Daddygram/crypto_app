@@ -10,6 +10,10 @@ type CoinData = {
 interface CoinsProps {
   coins: CoinData[];
   setCoins: React.Dispatch<React.SetStateAction<CoinData[]>>;
+  page: number;
+  setPage: any;
+  currentCoins: any;
+  coinsPerPage: any;
 }
 
 interface UrlQueryParams {
