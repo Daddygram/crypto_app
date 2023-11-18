@@ -4,7 +4,7 @@ import Pagination from '@mui/material/Pagination';
 
 import Image from 'next/image';
 import { coinOptions } from './utilities/FetchData';
-import Loading from '@/app/(root)/(home)/Loading';
+import Loader from '@/app/(root)/(home)/Loader';
 
 
 const MarketSection: React.FC<CoinsProps> = ({coins, setCoins, currentCoins, page, setPage, coinsPerPage}) => {
@@ -44,7 +44,7 @@ const MarketSection: React.FC<CoinsProps> = ({coins, setCoins, currentCoins, pag
     window.scrollTo({ behavior: 'smooth' });
   };
 
-  if (!currentCoins.length) return <Loading />;
+  if (!currentCoins.length) return <Loader />;
 
   return (
     <section id='market' className='nav-padding w-full'>
