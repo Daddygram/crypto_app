@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react'
 import Pagination from '@mui/material/Pagination';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { coinOptions } from './utilities/FetchData';
-import Loading from '../app/(root)/(home)/Loading';
+import Loading from '@/app/(root)/(home)/Loading';
+
 
 const MarketSection: React.FC<CoinsProps> = ({coins, setCoins, currentCoins, page, setPage, coinsPerPage}) => {
   
