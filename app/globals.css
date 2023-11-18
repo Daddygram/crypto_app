@@ -38,15 +38,15 @@ html {
   }
 
   .heading2 {
-    @apply font-bold text-[48px] leading-[50.4px];
+    @apply font-bold text-[36px] xs:text-[48px] leading-[50.4px];
   }
 
   .heading3 {
-    @apply font-bold sm:text-[32px] sm:leading-[33.6px] text-[28px] leading-[40px] tracking-[-0.25%];
+    @apply font-bold sm:text-[32px] sm:leading-[33.6px] text-[22px] leading-[40px] tracking-[-0.25%];
   }
 
   .base-regular {
-    @apply text-[24px] font-normal leading-[31.2px];
+    @apply text-[16px] xs:text-[24px] font-normal leading-[31.2px];
   }
 
   .base-bold {

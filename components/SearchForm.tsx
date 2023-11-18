@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import Image from 'next/image'
 import { Input } from "@/components/ui/input"
@@ -27,25 +27,26 @@ const SearchForm: React.FC<CoinsProps> = ({setCoins}) => {
       }
     };
 
+
   return (
     <form className='flex-center mx-auto mt-10 w-full sm:mt-10 sm:px-5'>
         <label className='flex-center relative w-full max-w-3xl'>
             <Image 
             src="/magnifying-glass.svg" 
-            className='absolute left-8'
-            width={32}
-            height={32}
+            className='absolute left-4 xs:left-8 xs:w-8 xs:h-8'
+            width={25}
+            height={25}
             alt='Search Icon' />
             <Input
             className='base-regular h-fit border-0 bg-black-400 py-6 
-            pl-20 pr-8 text-white-800 !ring-0 !ring-offset-0
+            pl-12 xs:pl-16 pr-20 xs:pr-[100px] text-white-800 !ring-0 !ring-offset-0
             placeholder:text-white-800' 
             type='text'
             placeholder=''
             value={search}
             onChange={(e) => setSearch(e.target.value.toLowerCase())}
             onSubmit={handleSearch}/>
-            <Button className="hover:bg-black-200 mr-3" sx={{ color: '#fff', textTransform: 'none', width: { lg: '173px', xs: '100px' }, height: '56px', position: 'absolute', right: '0px', fontSize: { lg: '25px', xs: '20px' } }} onClick={handleSearch}>
+            <Button className="hover:bg-black-200 xs:mr-3" sx={{ color: '#fff', textTransform: 'none', width: { lg: '173px', xs: '100px' }, height: '56px', position: 'absolute', right: '0px', fontSize: { lg: '25px', xs: '20px' } }} onClick={handleSearch}>
               Search
             </Button>
         </label>

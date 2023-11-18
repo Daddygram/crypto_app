@@ -22,7 +22,7 @@ const page = () => {
       <section className='nav-padding w-full'>
         <div className='flex-center relative min-h-[274px] w-full flex-col rounded-xl bg-banner bg-cover bg-center text-center'>
           <h1 className='text-outline heading2 sm:heading1 lg:text-7xl mb-6 text-center text-white uppercase'>
-            Track and trade <br /> <span>Crypto Currencies</span>
+            Track Live <br /> <span>Crypto Currencies</span>
           </h1>
         </div>
         <SearchForm coins={coins} setCoins={setCoins} page={page} setPage={setPage} currentCoins={currentCoins} coinsPerPage={coinsPerPage} />
