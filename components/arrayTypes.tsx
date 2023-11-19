@@ -14,6 +14,10 @@ interface CoinsProps {
   setPage: any;
   currentCoins: any;
   coinsPerPage: any;
+  isLoading: boolean;
+  setIsLoading: any;
+  hasResults: any;
+  setHasResults: any;
 }
 
 interface UrlQueryParams {

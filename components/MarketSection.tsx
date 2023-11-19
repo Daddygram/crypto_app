@@ -7,7 +7,7 @@ import { coinOptions } from './utilities/FetchData';
 import Loader from '@/app/(root)/(home)/Loader';
 
 
-const MarketSection: React.FC<CoinsProps> = ({coins, setCoins, currentCoins, page, setPage, coinsPerPage}) => {
+const MarketSection: React.FC<CoinsProps> = ({coins, setCoins, currentCoins, page, setPage, coinsPerPage, isLoading, setIsLoading, hasResults}) => {
   
 
   const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en`
@@ -15,10 +15,7 @@ const MarketSection: React.FC<CoinsProps> = ({coins, setCoins, currentCoins, pag
   const fetchData = async () => {
     try {
       const response = await fetch(url, coinOptions);
-      if (response.status === 429) {
-        console.log('Rate limit exceeded. Waiting and retrying...');
-        setTimeout(fetchData, 60000);
-      } else if (response.ok) {
+      if (response.ok) {
         const json = await response.json();
         setCoins(json);
       } else {
@@ -43,11 +40,12 @@ const MarketSection: React.FC<CoinsProps> = ({coins, setCoins, currentCoins, pag
 
     window.scrollTo({ behavior: 'smooth' });
   };
-
-  if (!currentCoins.length) return <Loader />;
+  if(currentCoins.length) setIsLoading(false)
+  if (isLoading) return <Loader />;
 
   return (
     <section id='market' className='nav-padding w-full'>
+    {!isLoading && !hasResults && <h2 className='heading3 mb-7 text-white text-center sm:text-left'>No results.</h2>}
     <h2 className='heading3 mb-7 text-white text-center sm:text-left'>Cryptocurrency Prices by Market Cap</h2>
     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4rem p-6 w-full gradient_purple text-white rounded-t-xl'>
       <p className='paragraph-regular'>Coin</p>
