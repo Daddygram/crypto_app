@@ -48,10 +48,8 @@ To get started with the Crypto App, follow these steps:
 ## Usage
 
 To start the development server, run:
-
-    ```sh
+    
     npm run dev
-    ```
 
 Open http://localhost:3000 in your browser to see the app.
 
