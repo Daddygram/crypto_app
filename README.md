@@ -73,5 +73,3 @@ We welcome contributions from the community! Here’s how you can help:
 
 ## License
 This project is licensed under the MIT License. See the LICENSE file for more information.
-
-You should now be able to copy the entire block, including the code snippets, without issues.
