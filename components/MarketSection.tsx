@@ -17,7 +17,6 @@ const MarketSection: React.FC<CoinsProps> = ({coins, setCoins, currentCoins, pag
       const response = await fetch(url, coinOptions);
       if (response.ok) {
         const json = await response.json();
-        console.log(json)
         setCoins(json);
       } else {
         console.error('Error fetching data:', response.status);
