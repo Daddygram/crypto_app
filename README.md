@@ -2,6 +2,8 @@
 
 Welcome to the Crypto App! This application displays the most popular cryptocurrencies and their values in real-time.
 
+<img src="./public/crypto.png">
+
 ## Table of Contents
 
 - [Features](#features)
