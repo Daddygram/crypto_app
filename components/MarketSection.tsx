@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Pagination from '@mui/material/Pagination';
 
 import Image from 'next/image';
@@ -17,6 +17,7 @@ const MarketSection: React.FC<CoinsProps> = ({coins, setCoins, currentCoins, pag
       const response = await fetch(url, coinOptions);
       if (response.ok) {
         const json = await response.json();
+        console.log(json)
         setCoins(json);
       } else {
         console.error('Error fetching data:', response.status);
